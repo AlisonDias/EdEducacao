@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EdEducacao">
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.CadastrarUsuario"></activity>
         <activity
-            android:name=".activity.CadastrarUsuario"
+            android:name=".activity.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

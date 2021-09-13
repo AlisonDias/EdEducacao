@@ -214,15 +214,14 @@ public class Login extends AppCompatActivity {
                             finish();
 
                         }else{
-
-                            //startActivity(new Intent(getApplicationContext(), MainActivityNaoAdm.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             alerta.dismiss();
                             finish();
                         }
 
                     }else {
 
-                        //startActivity(new Intent(getApplicationContext(), MainActivityNaoAdm.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         alerta.dismiss();
                         finish();
 
