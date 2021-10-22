@@ -15,6 +15,7 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String adm;
+    private String caminhoFoto;
 
     public Usuario() {
     }
@@ -31,6 +32,7 @@ public class Usuario implements Serializable {
         usuarioMap.put("email", getEmail());
         usuarioMap.put("nome", getNome());
         usuarioMap.put("id", getId());
+        usuarioMap.put("caminhoFoto", getCaminhoFoto() );
 
         return usuarioMap;
     }
@@ -84,5 +86,13 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
     }
 }
