@@ -53,5 +53,14 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
+    //Dependências circle image view
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Dependências AndroidPhotoFilter
+    implementation 'info.androidhive:imagefilters:1.0.7'
+
+    //Dependência da Lib Universal Image Loader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
 
 }

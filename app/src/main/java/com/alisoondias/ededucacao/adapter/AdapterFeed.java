@@ -97,20 +97,6 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
                 curtida.setUsuario( usuarioLogado );
                 curtida.setQtdCurtidas( qtdCurtidas );
 
-                /*//Adiciona eventos para curtir uma foto
-                holder.likeButton.setOnLikeListener(new OnLikeListener() {
-                    @Override
-                    public void liked(LikeButton likeButton) {
-                        curtida.salvar();
-                        holder.qtdCurtidas.setText( curtida.getQtdCurtidas() + " curtidas" );
-                    }
-
-                    @Override
-                    public void unLiked(LikeButton likeButton) {
-                        curtida.remover();
-                        holder.qtdCurtidas.setText( curtida.getQtdCurtidas() + " curtidas" );
-                    }
-                });*/
 
                 holder.qtdCurtidas.setText( curtida.getQtdCurtidas() + " curtidas" );
 

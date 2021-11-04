@@ -16,6 +16,7 @@ public class Usuario implements Serializable {
     private String senha;
     private String adm;
     private String caminhoFoto;
+    private int postagens = 0;
 
     public Usuario() {
     }
@@ -45,6 +46,20 @@ public class Usuario implements Serializable {
                 .child( getId() );
         Map<String, Object> valoresUsuario = converterParaMap();
         usuariosRef.updateChildren( valoresUsuario );
+
+    }
+
+    public void atualizarQtdPostagem(){
+
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference usuariosRef = firebaseRef
+                .child("usuarios")
+                .child( getId() );
+
+        HashMap<String, Object> dados = new HashMap<>();
+        dados.put("postagens", getPostagens() );
+
+        usuariosRef.updateChildren( dados );
 
     }
 
@@ -94,5 +109,14 @@ public class Usuario implements Serializable {
 
     public void setCaminhoFoto(String caminhoFoto) {
         this.caminhoFoto = caminhoFoto;
+    }
+
+    public int getPostagens() {
+        return postagens;
+    }
+
+
+    public void setPostagens(int postagens) {
+        this.postagens = postagens;
     }
 }
