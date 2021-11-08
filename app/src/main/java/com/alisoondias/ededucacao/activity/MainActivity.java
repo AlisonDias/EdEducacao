@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.annotation.NonNull;;
@@ -14,12 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import com.alisoondias.ededucacao.R;
 import com.alisoondias.ededucacao.fragment.ChatFragment;
-import com.alisoondias.ededucacao.fragment.FeedFragment;
 import com.alisoondias.ededucacao.fragment.HomeFragment;
 import com.alisoondias.ededucacao.fragment.PostagemFragment;
 import com.alisoondias.ededucacao.fragment.TrabalhosFragment;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
-import com.alisoondias.ededucacao.model.Postagem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         inicializarComponentes();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeFragment()).commit();
@@ -93,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_sair :
                 deslogarUsuario();
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                break;
+
+            case R.id.menu_perfil:
+                startActivity(new Intent(getApplicationContext(), EditarPerfilActivity.class));
+                break;
+
+            case R.id.menu_add_escola:
+                startActivity(new Intent(getApplicationContext(), CadastrarEscola.class));
+                break;
+            case R.id.menu_add_Turma:
+                startActivity(new Intent(getApplicationContext(), CadastrarTurma.class));
                 break;
         }
 

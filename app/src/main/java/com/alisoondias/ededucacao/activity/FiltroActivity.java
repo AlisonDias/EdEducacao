@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ import com.alisoondias.ededucacao.model.Postagem;
 import com.alisoondias.ededucacao.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -87,7 +89,7 @@ public class FiltroActivity extends AppCompatActivity {
         textDescricaoFiltro = findViewById(R.id.textDescricaoFiltro);
 
         //Recuperar dados para uma nova postagem
-        //recuperarDadosPostagem();
+        recuperarDadosPostagem();
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -153,13 +155,13 @@ public class FiltroActivity extends AppCompatActivity {
         alert.setView(R.layout.carregamento);
 
         dialog = alert.create();
-        dialog.show();
+        //dialog.show();
 
     }
 
     private void recuperarDadosPostagem(){
 
-        abrirDialogCarregamento("Carregando dados, aguarde!");
+        //abrirDialogCarregamento("Carregando dados, aguarde!");
         usuarioLogadoRef = usuariosRef.child( idUsuarioLogado );
         usuarioLogadoRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -178,7 +180,7 @@ public class FiltroActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 seguidoresSnapshot = dataSnapshot;
-                                dialog.cancel();
+                                //dialog.cancel();
                             }
 
                             @Override
@@ -262,21 +264,32 @@ public class FiltroActivity extends AppCompatActivity {
 
                 //Recuperar local da foto
 
+                Task<Uri> task = taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        postagem.setCaminhoFoto(uri.toString());
+                        Log.d("foto", uri.toString());
 
-                //Atualizar qtde de postagens
-                int qtdPostagem = usuarioLogado.getPostagens() + 1;
-                usuarioLogado.setPostagens( qtdPostagem );
-                usuarioLogado.atualizarQtdPostagem();
+                        //Atualizar qtde de postagens
+                        int qtdPostagem = usuarioLogado.getPostagens() + 1;
+                        usuarioLogado.setPostagens( qtdPostagem );
+                        usuarioLogado.atualizarQtdPostagem();
 
-                //Salvar postagem
-                if( postagem.salvar( seguidoresSnapshot ) ){
+                        //Salvar postagem
+                        if( postagem.salvar( seguidoresSnapshot ) ){
 
-                    Toast.makeText(FiltroActivity.this,
-                            "Sucesso ao salvar postagem!",
-                            Toast.LENGTH_SHORT).show();
-                    dialog.cancel();
-                    finish();
-                }
+                            Toast.makeText(FiltroActivity.this,
+                                    "Sucesso ao salvar postagem!",
+                                    Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                            finish();
+                        }
+
+                    }
+                });
+
+
+
 
             }
         });

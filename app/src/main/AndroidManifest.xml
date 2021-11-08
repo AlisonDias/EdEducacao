@@ -11,17 +11,19 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
+
             <category android:name="android.intent.category.BROWSABLE" />
+
             <data android:scheme="https" />
         </intent>
     </queries>
-
 
     <application
         android:allowBackup="true"
@@ -30,9 +32,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EdEducacao">
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.CadastrarUsuario"></activity>
-        <activity android:name=".activity.FiltroActivity"></activity>
+        <activity
+            android:name=".activity.CadastrarTurma"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CadastrarEscola"
+            android:exported="false" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.CadastrarUsuario" />
+        <activity android:name=".activity.FiltroActivity" />
+        <activity android:name=".activity.EditarPerfilActivity" />
         <activity
             android:name=".activity.Login"
             android:exported="true">

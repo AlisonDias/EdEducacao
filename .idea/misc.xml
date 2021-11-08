@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable-v24/ic_email_black_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable-v24/ic_perfil_preto_24dp.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.146875" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable/ic_baseline_dynamic_feed_24.xml" value="0.146875" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.146875" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.146875" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/drawable/ic_close_black_24dp.xml" value="0.146875" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_escola.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_turma.xml" value="0.33" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_usuario.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_editar_perfil.xml" value="0.33" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_filtro.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -25,6 +30,7 @@
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/menu/booton_nav_menu.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/menu/menu_filtro.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/menu/menu_main.xml" value="0.1" />
+        <entry key="..\:/Users/aliso/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.13072916666666667" />
       </map>
     </option>
   </component>

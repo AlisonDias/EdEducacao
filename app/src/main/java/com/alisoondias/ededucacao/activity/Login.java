@@ -54,6 +54,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
         verificarUsuarioLogado();
         inicializarComponentes();
 
@@ -100,7 +102,12 @@ public class Login extends AppCompatActivity {
     }
 
     public void verificarUsuarioLogado(){
+
+
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+
+
         if( autenticacao.getCurrentUser() != null ){
 
             //criaAlerta();
@@ -207,25 +214,13 @@ public class Login extends AppCompatActivity {
 
                         Usuario usuarioLogado= dataSnapshot.getValue(Usuario.class);
 
-                        if(usuarioLogado.getAdm().equals("true")){
 
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             alerta.dismiss();
                             finish();
 
-                        }else{
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            alerta.dismiss();
-                            finish();
+
                         }
-
-                    }else {
-
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        alerta.dismiss();
-                        finish();
-
-                    }
 
                 }
 

@@ -14,8 +14,10 @@ public class Usuario implements Serializable {
     private String nome;
     private String email;
     private String senha;
-    private String adm;
     private String caminhoFoto;
+    private String escola;
+    private String turma;
+    private String aluno;
     private int postagens = 0;
 
     public Usuario() {
@@ -33,6 +35,9 @@ public class Usuario implements Serializable {
         usuarioMap.put("email", getEmail());
         usuarioMap.put("nome", getNome());
         usuarioMap.put("id", getId());
+        usuarioMap.put("escola", getEscola());
+        usuarioMap.put("turma", getTurma());
+        usuarioMap.put("aluno", getAluno());
         usuarioMap.put("caminhoFoto", getCaminhoFoto() );
 
         return usuarioMap;
@@ -63,13 +68,6 @@ public class Usuario implements Serializable {
 
     }
 
-    public String getAdm() {
-        return adm;
-    }
-
-    public void setAdm(String adm) {
-        this.adm = adm;
-    }
 
     public String getId() {
         return id;
@@ -115,8 +113,31 @@ public class Usuario implements Serializable {
         return postagens;
     }
 
-
     public void setPostagens(int postagens) {
         this.postagens = postagens;
+    }
+
+    public String getEscola() {
+        return escola;
+    }
+
+    public void setEscola(String escola) {
+        this.escola = escola;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
+    public String getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(String aluno) {
+        this.aluno = aluno;
     }
 }

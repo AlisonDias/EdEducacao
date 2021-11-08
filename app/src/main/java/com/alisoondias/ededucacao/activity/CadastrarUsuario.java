@@ -96,22 +96,14 @@ public class CadastrarUsuario extends AppCompatActivity {
 
                         String idUsuario = task.getResult().getUser().getUid();
                         usuario.setId(idUsuario);
-                        if(checkBoxAdm.isChecked()){
 
-                            usuario.setAdm("true");
-
-                        }else{
-                            usuario.setAdm("false");
-                        }
                         usuario.salvar();
-
 
                         Toast.makeText(CadastrarUsuario.this, "Sucesso ao se cadastrar!", Toast.LENGTH_SHORT).show();
                         if(verificaAutenticacao == null){
                             startActivity( new Intent(getApplicationContext(), MainActivity.class));
                         }else {
                             startActivity( new Intent(getApplicationContext(), MainActivity.class));
-                            //startActivity(new Intent(getApplicationContext(), MainActivityNaoAdm.class));
                         }
 
                         finish();

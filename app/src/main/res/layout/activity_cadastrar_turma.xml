@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CadastrarTurma">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="281dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <EditText
+        android:id="@+id/editTextNomeTurma"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Numero da Turma"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_Escola_Turma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/buttonCadastrarTurma"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:hint="Cadastrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Escola_Turma" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CADASTRAR TURMA"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNomeTurma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Spinner
+        android:id="@+id/spinner_Escola_Turma"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarTurma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeTurma" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
