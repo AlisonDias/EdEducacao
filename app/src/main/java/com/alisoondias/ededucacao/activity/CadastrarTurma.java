@@ -33,6 +33,7 @@ public class CadastrarTurma extends AppCompatActivity {
     private Button buttonCadastrarTurma;
     private Spinner spinnerEscolaTurma;
     private List<String> escolasString = new ArrayList<String>();
+    private List<Escola> escolasOBJ = new ArrayList<>();
 
 
 
@@ -60,8 +61,12 @@ public class CadastrarTurma extends AppCompatActivity {
                             String areaName = escolaSnapshot.child("nome").getValue(String.class);
                             escolasString.add(areaName);
 
+                            //Log.i("teste", escola.getId());
+                            escolasOBJ.add(escola);
+
                         }
                         Log.i("teste", escolasString.toString());
+
 
 
                         ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CadastrarTurma.this, android.R.layout.simple_spinner_item, escolasString);
@@ -95,6 +100,7 @@ public class CadastrarTurma extends AppCompatActivity {
 
                     Escola escola = new Escola();
                     escola.setNome(itemSelecionado);
+                    escola.setId(escolasOBJ.get(posicao).getId());
                     Turma turma = new Turma();
                     turma.setNome(nomeTurma);
                     turma.setEscola(escola);
