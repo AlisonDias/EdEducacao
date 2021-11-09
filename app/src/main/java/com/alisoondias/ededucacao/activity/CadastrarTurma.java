@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,10 @@ public class CadastrarTurma extends AppCompatActivity {
     private EditText editTextNomeTurma;
     private Button buttonCadastrarTurma;
     private Spinner spinnerEscolaTurma;
+    private List<String> escolasString = new ArrayList<String>();
+
+
+
 
 
     @Override
@@ -40,29 +45,39 @@ public class CadastrarTurma extends AppCompatActivity {
 
         inicializarCompontentes();
 
+
+
+
         ConfiguracaoFirebase.getFirebase().child("escola").orderByChild("nome").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        final List<String> escolas = new ArrayList<String>();
+
                         for (DataSnapshot escolaSnapshot: snapshot.getChildren()) {
+
+                            Escola escola = escolaSnapshot.getValue(Escola.class);
+
                             String areaName = escolaSnapshot.child("nome").getValue(String.class);
-                            escolas.add(areaName);
+                            escolasString.add(areaName);
+
                         }
+                        Log.i("teste", escolasString.toString());
 
 
-                        Spinner areaSpinner = (Spinner) findViewById(R.id.spinnerEscola);
-                        ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CadastrarTurma.this, android.R.layout.simple_spinner_item, escolas);
+                        ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CadastrarTurma.this, android.R.layout.simple_spinner_item, escolasString);
                         areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        areaSpinner.setAdapter(areasAdapter);
+                        spinnerEscolaTurma.setAdapter(areasAdapter);
+
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
+
+
+
 
 
         buttonCadastrarTurma.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +88,16 @@ public class CadastrarTurma extends AppCompatActivity {
 
                 if( !nomeTurma.isEmpty() ){
 
+                    int posicao = spinnerEscolaTurma.getSelectedItemPosition();
+                    String itemSelecionado = escolasString.get(posicao);
+
+
+
+                    Escola escola = new Escola();
+                    escola.setNome(itemSelecionado);
                     Turma turma = new Turma();
                     turma.setNome(nomeTurma);
+                    turma.setEscola(escola);
                     turma.salvar();
                     finish();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -95,7 +118,7 @@ public class CadastrarTurma extends AppCompatActivity {
 
         editTextNomeTurma = findViewById(R.id.editTextNomeTurma);
         buttonCadastrarTurma = findViewById(R.id.buttonCadastrarTurma);
-        spinnerEscolaTurma = (Spinner) findViewById(R.id.spinnerEscola);
+        spinnerEscolaTurma = (Spinner) findViewById(R.id.spinner_Escola_Turma);
 
     }
 }

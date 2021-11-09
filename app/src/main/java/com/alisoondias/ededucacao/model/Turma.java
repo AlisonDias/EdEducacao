@@ -17,7 +17,7 @@ public class Turma implements Serializable {
     public boolean salvar(){
 
         DatabaseReference turmaRef = ConfiguracaoFirebase.getFirebase()
-                .child("escola").child(getEscola().getId());
+                .child("turma").child(escola.getNome());
         String chaveTurma = turmaRef.push().getKey();
         setId( chaveTurma );
         turmaRef.child( getId()).setValue( this );

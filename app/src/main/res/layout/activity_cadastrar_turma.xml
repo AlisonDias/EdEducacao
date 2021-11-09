@@ -53,6 +53,7 @@
         android:id="@+id/spinner_Escola_Turma"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarTurma"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
