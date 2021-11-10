@@ -105,7 +105,7 @@ public class Login extends AppCompatActivity {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
-
+        //autenticacao.signOut();
 
 
         if( autenticacao.getCurrentUser() != null ){

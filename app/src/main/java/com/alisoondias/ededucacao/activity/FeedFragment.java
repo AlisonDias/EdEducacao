@@ -2,6 +2,7 @@ package com.alisoondias.ededucacao.activity;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.alisoondias.ededucacao.adapter.AdapterFeed;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
 import com.alisoondias.ededucacao.helper.UsuarioFirebase;
 import com.alisoondias.ededucacao.model.Feed;
+import com.alisoondias.ededucacao.model.Postagem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +30,7 @@ public class FeedFragment extends Fragment {
 
     private RecyclerView recyclerFeed;
     private AdapterFeed adapterFeed;
-    private List<Feed> listaFeed = new ArrayList<>();
+    private List<Postagem> listaFeed = new ArrayList<Postagem>();
     private ValueEventListener valueEventListenerFeed;
     private DatabaseReference feedRef;
     private String idUsuarioLogado;
@@ -48,8 +50,7 @@ public class FeedFragment extends Fragment {
         //Configurações iniciais
         idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         feedRef = ConfiguracaoFirebase.getFirebase()
-                .child("feed")
-                .child( idUsuarioLogado );
+                .child("postagens").child(idUsuarioLogado);
 
         //Inicializar componentes
         recyclerFeed = view.findViewById(R.id.recyclerFeed);
@@ -69,10 +70,14 @@ public class FeedFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for ( DataSnapshot ds: dataSnapshot.getChildren() ){
-                    listaFeed.add( ds.getValue(Feed.class) );
+                    listaFeed.add( ds.getValue(Postagem.class) );
+
+                    //Log.i("urlFoto", listaFeed);
                 }
                 Collections.reverse( listaFeed );
                 adapterFeed.notifyDataSetChanged();
+
+
             }
 
             @Override

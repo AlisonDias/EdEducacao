@@ -2,6 +2,7 @@ package com.alisoondias.ededucacao.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.alisoondias.ededucacao.R;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
 import com.alisoondias.ededucacao.helper.UsuarioFirebase;
 import com.alisoondias.ededucacao.model.Feed;
+import com.alisoondias.ededucacao.model.Postagem;
 import com.alisoondias.ededucacao.model.PostagemCurtida;
 import com.alisoondias.ededucacao.model.Usuario;
 
@@ -30,10 +32,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> {
 
-    private List<Feed> listaFeed;
+    private List<Postagem> listaFeed;
     private Context context;
 
-    public AdapterFeed(List<Feed> listaFeed, Context context) {
+    public AdapterFeed(List<Postagem> listaFeed, Context context) {
         this.listaFeed = listaFeed;
         this.context = context;
     }
@@ -47,18 +49,24 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        final Feed feed = listaFeed.get(position);
+        final Postagem feed = listaFeed.get(position);
         final Usuario usuarioLogado = UsuarioFirebase.getDadosUsuarioLogado();
 
         //Carrega dados do feed
-        Uri uriFotoUsuario = Uri.parse( feed.getFotoUsuario() );
-        Uri uriFotoPostagem = Uri.parse( feed.getFotoPostagem() );
+
+        Log.i("urlDENTRO", listaFeed.get(position).toString());
+
+        Uri uriFotoUsuario = Uri.parse( usuarioLogado.getCaminhoFoto() );
+        Uri uriFotoPostagem = Uri.parse( feed.getCaminhoFoto() );
 
         Glide.with( context ).load( uriFotoUsuario ).into(holder.fotoPerfil);
         Glide.with( context ).load( uriFotoPostagem ).into(holder.fotoPostagem);
 
+        //Log.i("uri", feed.getFotoPostagem().toString());
+
         holder.descricao.setText( feed.getDescricao() );
-        holder.nome.setText( feed.getNomeUsuario() );
+        //holder.nome.setText( feed.getNomeUsuario() );
+
 
         //Adiciona evento de clique nos comentários
         holder.visualizarComentario.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +101,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
 
                 //Monta objeto postagem curtida
                 final PostagemCurtida curtida = new PostagemCurtida();
-                curtida.setFeed( feed );
+                //curtida.setFeed( feed );
                 curtida.setUsuario( usuarioLogado );
                 curtida.setQtdCurtidas( qtdCurtidas );
 

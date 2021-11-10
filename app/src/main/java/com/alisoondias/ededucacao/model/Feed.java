@@ -1,9 +1,11 @@
 package com.alisoondias.ededucacao.model;
 
-public class Feed {
+import java.io.Serializable;
+
+public class Feed implements Serializable {
 
     private String id;
-    private String fotoPostagem;
+    private String caminhoFoto;
     private String descricao;
     private String nomeUsuario;
     private String fotoUsuario;
@@ -19,12 +21,12 @@ public class Feed {
         this.id = id;
     }
 
-    public String getFotoPostagem() {
-        return fotoPostagem;
+    public String getCaminhoFoto() {
+        return caminhoFoto;
     }
 
-    public void setFotoPostagem(String fotoPostagem) {
-        this.fotoPostagem = fotoPostagem;
+    public void setCaminhoFoto(String fotoPostagem) {
+        this.caminhoFoto = caminhoFoto;
     }
 
     public String getDescricao() {
