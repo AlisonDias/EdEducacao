@@ -9,7 +9,10 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,8 @@ import com.alisoondias.ededucacao.R;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
 import com.alisoondias.ededucacao.helper.Permissao;
 import com.alisoondias.ededucacao.helper.UsuarioFirebase;
+import com.alisoondias.ededucacao.model.Escola;
+import com.alisoondias.ededucacao.model.Turma;
 import com.alisoondias.ededucacao.model.Usuario;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,11 +33,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,9 +54,20 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private TextInputEditText editNomePerfil, editEmailPerfil;
     private Button buttonSalvarAlteracoes;
     private Usuario usuarioLogado;
+    private Usuario usuarioLogado_escola;
     private static final int SELECAO_GALERIA = 200;
     private StorageReference storageRef;
     private String identificadorUsuario;
+
+    private DatabaseReference usuarioLogadoRef;
+
+    private Spinner spinnerTurma;
+
+    private Escola escola;
+    private Turma turma;
+
+    private List<String> turmasString = new ArrayList<String>();
+    private List<Turma> turmasOBJ = new ArrayList<>();
 
     private String[] permissoesNecessarias = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -81,6 +103,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
         editNomePerfil.setText( usuarioPerfil.getDisplayName().toUpperCase() );
         editEmailPerfil.setText( usuarioPerfil.getEmail() );
 
+        TredDadosUsuario tredDadosUsuario = new TredDadosUsuario();
+        tredDadosUsuario.run();
+
         Uri url = usuarioPerfil.getPhotoUrl();
         if( url != null ){
             Glide.with(EditarPerfilActivity.this)
@@ -95,13 +120,22 @@ public class EditarPerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 String nomeAtualizado = editNomePerfil.getText().toString();
 
                 //atualizar nome no perfil
                 UsuarioFirebase.atualizarNomeUsuario( nomeAtualizado );
 
+                int posicao = spinnerTurma.getSelectedItemPosition();
+                String itemSelecionado = turmasString.get(posicao);
+
+                turma.setNome(itemSelecionado);
+                turma.setId(turmasOBJ.get(posicao).getId());
+
+
                 //Atualizar nome no banco de dados
                 usuarioLogado.setNome( nomeAtualizado );
+                usuarioLogado.setTurma(turma);
                 usuarioLogado.atualizar();
 
                 Toast.makeText(EditarPerfilActivity.this,
@@ -121,6 +155,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 
@@ -219,6 +254,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         editEmailPerfil        = findViewById(R.id.editEmailPerfil);
         buttonSalvarAlteracoes = findViewById(R.id.buttonSalvarAlteracoes);
         editEmailPerfil.setFocusable(false);
+        spinnerTurma = (Spinner) findViewById(R.id.spinner_Turma);
 
     }
 
@@ -229,4 +265,73 @@ public class EditarPerfilActivity extends AppCompatActivity {
         return false;
 
     }
+
+    class TredDadosUsuario extends Thread{
+
+        @Override
+        public void run() {
+            super.run();
+
+            usuarioLogadoRef = ConfiguracaoFirebase.getFirebase().child("usuarios").child(usuarioLogado.getId());
+
+            usuarioLogadoRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    if(dataSnapshot.exists()){
+
+                        usuarioLogado_escola= dataSnapshot.getValue(Usuario.class);
+
+                        Log.i("Escola2222222222", usuarioLogado_escola.getEscola().getId());
+
+
+
+                        ConfiguracaoFirebase.getFirebase().child("escola").child(usuarioLogado_escola.getEscola().getId()).child("turma").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                                for (DataSnapshot turmaSnapshot: snapshot.getChildren()) {
+
+                                    turma = turmaSnapshot.getValue(Turma.class);
+
+                                    String areaName = turmaSnapshot.child("nome").getValue(String.class);
+                                    turmasString.add(areaName);
+
+                                    //Log.i("teste", escola.getId());
+                                    turmasOBJ.add(turma);
+
+
+
+                                }
+                                Log.i("teste", turmasString.toString());
+
+
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(EditarPerfilActivity.this, android.R.layout.simple_spinner_item, turmasString);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinnerTurma.setAdapter(areasAdapter);
+
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
 }

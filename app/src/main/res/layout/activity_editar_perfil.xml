@@ -55,9 +55,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/spinnerEscola"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/spinner_Turma"
+            android:layout_width="347dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
 
 
         <Button

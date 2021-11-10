@@ -4,18 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.activity.Login"
+    tools:context=".activity.CadastrarUsuario"
     tools:layout_editor_absoluteY="81dp">
 
     <EditText
         android:id="@+id/editTextEmailCadastrar"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -26,33 +21,25 @@
 
     <EditText
         android:id="@+id/editTextSenhaCadastrar"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPersonName|textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxAdm"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_Escola_Usuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailCadastrar" />
 
     <Button
         android:id="@+id/buttonCadastrarUsuario"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
         android:text="Cadastrar"
-        app:layout_constraintBottom_toTopOf="@+id/progressBarCadastrarUsuario"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxAdm" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Escola_Usuario" />
 
     <ProgressBar
         android:id="@+id/progressBarCadastrarUsuario"
@@ -70,16 +57,12 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonCadastrarUsuario"
         tools:visibility="gone" />
 
-    <CheckBox
-        android:id="@+id/checkBoxAdm"
-        android:layout_width="0dp"
+    <Spinner
+        android:id="@+id/spinner_Escola_Usuario"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="Administrador"
+        android:minHeight="48dp"
+
         app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,16 +70,11 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="170dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:srcCompat="@drawable/ed_educacao" />
 </androidx.constraintlayout.widget.ConstraintLayout>

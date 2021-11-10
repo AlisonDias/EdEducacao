@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.alisoondias.ededucacao.R;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
+import com.alisoondias.ededucacao.model.Escola;
 import com.alisoondias.ededucacao.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,8 +26,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.nio.BufferUnderflowException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CadastrarUsuario extends AppCompatActivity {
 
@@ -36,6 +45,10 @@ public class CadastrarUsuario extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private FirebaseAuth verificaAutenticacao;
 
+    private Spinner spinnerEscolaUsuario;
+    private List<String> escolasString = new ArrayList<String>();
+    private List<Escola> escolasOBJ = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +57,40 @@ public class CadastrarUsuario extends AppCompatActivity {
         inicializarComponentes();
 
         progressBarCadastrarUsuario.setVisibility(View.GONE);
+
+        ConfiguracaoFirebase.getFirebase().child("escola").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                for (DataSnapshot escolaSnapshot: snapshot.getChildren()) {
+
+                    Escola escola = escolaSnapshot.getValue(Escola.class);
+
+                    String areaName = escolaSnapshot.child("nome").getValue(String.class);
+                    escolasString.add(areaName);
+
+                    //Log.i("teste", escola.getId());
+                    escolasOBJ.add(escola);
+
+                }
+                Log.i("teste", escolasString.toString());
+
+
+
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CadastrarUsuario.this, android.R.layout.simple_spinner_item, escolasString);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerEscolaUsuario.setAdapter(areasAdapter);
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         buttonCadastrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +103,18 @@ public class CadastrarUsuario extends AppCompatActivity {
                 if(!textoEmail.isEmpty()) {
                     if (!textoSenha.isEmpty()) {
 
-                        usuario = new Usuario();
+                        int posicao = spinnerEscolaUsuario.getSelectedItemPosition();
+                        String itemSelecionado = escolasString.get(posicao);
 
+                        Escola escola = new Escola();
+                        escola.setNome(itemSelecionado);
+                        escola.setId(escolasOBJ.get(posicao).getId());
+
+                        usuario = new Usuario();
                         usuario.setEmail(textoEmail);
                         usuario.setSenha(textoSenha);
+                        usuario.setEscola(escola);
+
                         cadastrarUsuario();
 
                     }else{
@@ -149,15 +204,16 @@ public class CadastrarUsuario extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.editTextEmailCadastrar);
         editTextSenha = findViewById(R.id.editTextSenhaCadastrar);
-        checkBoxAdm = findViewById(R.id.checkBoxAdm);
         buttonCadastrarUsuario = findViewById(R.id.buttonCadastrarUsuario);
         progressBarCadastrarUsuario = findViewById(R.id.progressBarCadastrarUsuario);
 
         verificaAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         if(verificaAutenticacao.getCurrentUser() == null){
-            checkBoxAdm.setVisibility( View.GONE );
+            //checkBoxAdm.setVisibility( View.GONE );
         }
+
+        spinnerEscolaUsuario = (Spinner) findViewById(R.id.spinner_Escola_Usuario);
     }
 }
 

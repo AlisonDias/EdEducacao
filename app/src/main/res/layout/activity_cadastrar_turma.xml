@@ -23,7 +23,7 @@
         android:ems="10"
         android:hint="Numero da Turma"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_Escola_Turma"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_Escola_Usuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_Escola_Turma" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Escola_Usuario" />
 
     <TextView
         android:id="@+id/textView6"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Spinner
-        android:id="@+id/spinner_Escola_Turma"
+        android:id="@+id/spinner_Escola_Usuario"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"

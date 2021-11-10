@@ -7,12 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.alisoondias.ededucacao.R;
@@ -21,7 +19,6 @@ import com.alisoondias.ededucacao.model.Escola;
 import com.alisoondias.ededucacao.model.Turma;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -124,7 +121,7 @@ public class CadastrarTurma extends AppCompatActivity {
 
         editTextNomeTurma = findViewById(R.id.editTextNomeTurma);
         buttonCadastrarTurma = findViewById(R.id.buttonCadastrarTurma);
-        spinnerEscolaTurma = (Spinner) findViewById(R.id.spinner_Escola_Turma);
+        spinnerEscolaTurma = (Spinner) findViewById(R.id.spinner_Escola_Usuario);
 
     }
 }
