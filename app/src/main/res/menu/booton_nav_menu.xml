@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/ic_home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home">
-    </item>
-    <item android:id="@+id/ic_chat"
-        android:icon="@drawable/ic_baseline_chat_24"
-        android:title="Chat">
+    <item android:id="@+id/ic_aluno"
+        android:icon="@drawable/ic_baseline_person_search_24"
+        android:title="Alunos">
     </item>
     <item android:id="@+id/ic_feed"
         android:icon="@drawable/ic_baseline_dynamic_feed_24"

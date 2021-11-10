@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;;
 import androidx.fragment.app.Fragment;
 
 import com.alisoondias.ededucacao.R;
-import com.alisoondias.ededucacao.fragment.ChatFragment;
+import com.alisoondias.ededucacao.fragment.AlunoFragment;
 import com.alisoondias.ededucacao.fragment.HomeFragment;
 import com.alisoondias.ededucacao.fragment.PostagemFragment;
 import com.alisoondias.ededucacao.fragment.TrabalhosFragment;
@@ -45,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectFragment = null;
 
                 switch (item.getItemId()) {
-                    case R.id.ic_home:
-                        selectFragment = new HomeFragment();
-                        break;
-                    case R.id.ic_chat:
-                        selectFragment = new ChatFragment();
+
+                    case R.id.ic_aluno:
+                        selectFragment = new AlunoFragment();
                         break;
                     case R.id.ic_trabalhos:
                         selectFragment = new TrabalhosFragment();
