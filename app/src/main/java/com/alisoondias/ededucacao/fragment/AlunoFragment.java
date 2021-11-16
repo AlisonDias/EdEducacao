@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alisoondias.ededucacao.R;
+import com.alisoondias.ededucacao.activity.AlunoSelecionado;
 import com.alisoondias.ededucacao.activity.CadastrarAluno;
 import com.alisoondias.ededucacao.adapter.AdapterAlunos;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
+import com.alisoondias.ededucacao.helper.RecyclerItemClickListener;
 import com.alisoondias.ededucacao.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +61,33 @@ public class AlunoFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(view.getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                    }
+
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Aluno alunoSelecionado = listaAluno.get(position);
+                        Intent intent = new Intent(getActivity(), AlunoSelecionado.class);
+                        intent.putExtra("alunoSelecionado", alunoSelecionado);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                })
+        );
+
+
 
 
 
@@ -114,6 +144,7 @@ public class AlunoFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        listaAluno.clear();
         alunosRef.removeEventListener(valueEventListenerAlunos);
     }
 
