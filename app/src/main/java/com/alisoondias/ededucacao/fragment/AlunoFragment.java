@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class AlunoFragment extends Fragment {
@@ -48,7 +47,7 @@ public class AlunoFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_aluno, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewAlunos) ;
+        recyclerView = view.findViewById(R.id.recyclerViewAvaliacao) ;
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         alunosRef = ConfiguracaoFirebase.getFirebase().child("alunos");

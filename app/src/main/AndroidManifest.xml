@@ -35,6 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EdEducacao">
         <activity
+            android:name=".activity.CadastrarAvaliacao"
+            android:exported="false" />
+        <activity
             android:name=".activity.AlunoSelecionado"
             android:exported="false" />
         <activity
