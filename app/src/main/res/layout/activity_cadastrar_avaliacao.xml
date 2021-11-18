@@ -6,4 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".activity.CadastrarAvaliacao">
 
+    <Spinner
+        android:id="@+id/spinner_Aluno"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Data"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutAvaliacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Aluno" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutAvaliacao"
+        android:layout_width="366dp"
+        android:layout_height="154dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarAvaliacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextData">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/texteInputEditTextAvaliacao"
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:hint="Avaliação" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonCadastrarAvaliacao"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAvaliacao" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

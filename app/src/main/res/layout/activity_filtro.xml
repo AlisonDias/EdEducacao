@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/imageFotoEscolhida"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="280dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/avatar" />
 
@@ -38,7 +38,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerFiltros"
             android:layout_width="match_parent"
-            android:layout_height="110dp" />
+            android:layout_height="90dp" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Spinner
+            android:id="@+id/spinner_Aluno_Postagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
 
     </LinearLayout>
 </ScrollView>

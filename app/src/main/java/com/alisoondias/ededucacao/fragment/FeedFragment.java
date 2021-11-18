@@ -53,7 +53,7 @@ public class FeedFragment extends Fragment {
         //Configurações iniciais
         idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         feedRef = ConfiguracaoFirebase.getFirebase()
-                .child("feed")
+                .child("postagens")
                 .child( idUsuarioLogado );
 
         //Inicializar componentes

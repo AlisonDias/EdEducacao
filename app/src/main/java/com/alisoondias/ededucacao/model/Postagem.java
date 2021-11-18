@@ -15,6 +15,8 @@ public class Postagem implements Serializable {
     private String idUsuario;
     private String descricao;
     private String caminhoFoto;
+    private Aluno aluno;
+    private Usuario usuario;
 
     public Postagem() {
 
@@ -46,8 +48,11 @@ public class Postagem implements Serializable {
             dadosSeguidor.put("fotoPostagem", getCaminhoFoto() );
             dadosSeguidor.put("descricao", getDescricao() );
             dadosSeguidor.put("id", getId() );
+            dadosSeguidor.put("aluno", getAluno() );
+            dadosSeguidor.put("usuario", getUsuario() );
             dadosSeguidor.put("nomeUsuario", usuarioLogado.getNome() );
             dadosSeguidor.put("fotoUsuario", usuarioLogado.getCaminhoFoto() );
+
 
             String idsAtualizacao = "/" + idSeguidor + "/" + getId();
             objeto.put("/feed" + idsAtualizacao, dadosSeguidor );
@@ -89,5 +94,21 @@ public class Postagem implements Serializable {
 
     public void setCaminhoFoto(String caminhoFoto) {
         this.caminhoFoto = caminhoFoto;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

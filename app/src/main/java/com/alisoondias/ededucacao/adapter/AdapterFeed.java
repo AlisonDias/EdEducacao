@@ -56,7 +56,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
 
         Log.i("urlDENTRO", listaFeed.get(position).toString());
 
-        Uri uriFotoUsuario = Uri.parse( usuarioLogado.getCaminhoFoto() );
+        Uri uriFotoUsuario = Uri.parse( feed.getUsuario().getCaminhoFoto() );
         Uri uriFotoPostagem = Uri.parse( feed.getCaminhoFoto() );
 
         Glide.with( context ).load( uriFotoUsuario ).into(holder.fotoPerfil);
@@ -65,56 +65,11 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
         //Log.i("uri", feed.getFotoPostagem().toString());
 
         holder.descricao.setText( feed.getDescricao() );
+        holder.nome.setText( feed.getUsuario().getNome() );
+        holder.textViewNomeAlunoPostagem.setText( feed.getAluno().getNome() );
         //holder.nome.setText( feed.getNomeUsuario() );
 
 
-        //Adiciona evento de clique nos comentários
-        holder.visualizarComentario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent i = new Intent(context, ComentariosActivity.class);
-                //i.putExtra("idPostagem", feed.getId() );
-                //context.startActivity( i );
-            }
-        });
-
-        //Recuperar dados da postagem curtida
-        DatabaseReference curtidasRef = ConfiguracaoFirebase.getFirebase()
-                .child("postagens-curtidas")
-                .child( feed.getId() );
-        curtidasRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                int qtdCurtidas = 0;
-                if( dataSnapshot.hasChild("qtdCurtidas") ){
-                    PostagemCurtida postagemCurtida = dataSnapshot.getValue( PostagemCurtida.class );
-                    qtdCurtidas = postagemCurtida.getQtdCurtidas();
-                }
-
-                //Verifica se já foi clicado
-                if( dataSnapshot.hasChild( usuarioLogado.getId() ) ){
-                    //holder.likeButton.setLiked(true);
-                }else {
-                   // holder.likeButton.setLiked(false);
-                }
-
-                //Monta objeto postagem curtida
-                final PostagemCurtida curtida = new PostagemCurtida();
-                //curtida.setFeed( feed );
-                curtida.setUsuario( usuarioLogado );
-                curtida.setQtdCurtidas( qtdCurtidas );
-
-
-                holder.qtdCurtidas.setText( curtida.getQtdCurtidas() + " curtidas" );
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
     }
@@ -127,8 +82,8 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView fotoPerfil;
-        TextView nome, descricao, qtdCurtidas;
-        ImageView fotoPostagem, visualizarComentario;
+        TextView nome, descricao, textViewNomeAlunoPostagem;
+        ImageView fotoPostagem;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -136,9 +91,10 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
             fotoPerfil   = itemView.findViewById(R.id.imagePerfilPostagem);
             fotoPostagem = itemView.findViewById(R.id.imagePostagemSelecionada);
             nome         = itemView.findViewById(R.id.textPerfilPostagem);
-            qtdCurtidas  = itemView.findViewById(R.id.textQtdCurtidasPostagem);
             descricao    = itemView.findViewById(R.id.textDescricaoPostagem);
-            visualizarComentario    = itemView.findViewById(R.id.imageComentarioFeed);
+            textViewNomeAlunoPostagem    = itemView.findViewById(R.id.textViewNomeAlunoPostagem);
+
+
         }
     }
 

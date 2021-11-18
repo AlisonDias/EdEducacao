@@ -47,7 +47,7 @@ public class AlunoFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_aluno, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewAvaliacao) ;
+        recyclerView = view.findViewById(R.id.recyclerViewAlunos) ;
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         alunosRef = ConfiguracaoFirebase.getFirebase().child("alunos");

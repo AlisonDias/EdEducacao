@@ -27,16 +27,17 @@
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_adapter_alunos.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_adapter_avaliacao.xml" value="0.128125" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_aluno_selecionado.xml" value="0.25" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_avaliacao_selecionado.xml" value="0.25" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_aluno.xml" value="0.2" />
-        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_avaliacao.xml" value="0.1" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_avaliacao.xml" value="0.25" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_escola.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_turma.xml" value="0.33" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_cadastrar_usuario.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_editar_perfil.xml" value="0.33" />
-        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_filtro.xml" value="0.13072916666666667" />
-        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_login.xml" value="0.18" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_filtro.xml" value="0.25" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/adapter_feed.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/adapter_feed.xml" value="0.25" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/adapter_filtros.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/booton_navegation.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/aliso/AndroidStudioProjects/EdEducacao/app/src/main/res/layout/carregamento.xml" value="0.13072916666666667" />

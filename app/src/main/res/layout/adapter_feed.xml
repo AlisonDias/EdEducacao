@@ -45,13 +45,13 @@
         app:srcCompat="@drawable/avatar" />
 
     <TextView
-        android:id="@+id/textQtdCurtidasPostagem"
+        android:id="@+id/textViewNomeAlunoPostagem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="0 curtidas"
+        android:text="NOME ALUNO"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
         android:text="Descricao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textQtdCurtidasPostagem" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeAlunoPostagem" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -80,18 +80,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagePostagemSelecionada">
-
-
-
-        <ImageView
-            android:id="@+id/imageComentarioFeed"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="16dp"
-            app:srcCompat="@drawable/comentario" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/imagePostagemSelecionada"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

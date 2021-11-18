@@ -10,8 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -26,6 +28,7 @@ import com.alisoondias.ededucacao.adapter.AdapterMiniaturas;
 import com.alisoondias.ededucacao.helper.ConfiguracaoFirebase;
 import com.alisoondias.ededucacao.helper.RecyclerItemClickListener;
 import com.alisoondias.ededucacao.helper.UsuarioFirebase;
+import com.alisoondias.ededucacao.model.Aluno;
 import com.alisoondias.ededucacao.model.Postagem;
 import com.alisoondias.ededucacao.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,6 +66,7 @@ public class FiltroActivity extends AppCompatActivity {
     private String idUsuarioLogado;
     private Usuario usuarioLogado;
     private AlertDialog dialog;
+    private Spinner spinner;
 
     private RecyclerView recyclerFiltros;
     private AdapterMiniaturas adapterMiniaturas;
@@ -71,6 +75,10 @@ public class FiltroActivity extends AppCompatActivity {
     private DatabaseReference usuarioLogadoRef;
     private DatabaseReference firebaseRef;
     private DataSnapshot seguidoresSnapshot;
+
+    private List<Aluno> alunosOBJ = new ArrayList<>();
+    private List<String> alunosString = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +91,12 @@ public class FiltroActivity extends AppCompatActivity {
         idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         usuariosRef = ConfiguracaoFirebase.getFirebase().child("usuarios");
 
+
         //Inicializar componentes
         imageFotoEscolhida = findViewById(R.id.imageFotoEscolhida);
         recyclerFiltros = findViewById(R.id.recyclerFiltros);
         textDescricaoFiltro = findViewById(R.id.textDescricaoFiltro);
+        spinner = findViewById(R.id.spinner_Aluno_Postagem);
 
         //Recuperar dados para uma nova postagem
         recuperarDadosPostagem();
@@ -98,6 +108,7 @@ public class FiltroActivity extends AppCompatActivity {
 
         //Recupera a imagem escolhida pelo usuário
         Bundle bundle = getIntent().getExtras();
+
         if( bundle != null ){
             byte[] dadosImagem = bundle.getByteArray("fotoEscolhida");
             imagem = BitmapFactory.decodeByteArray(dadosImagem, 0, dadosImagem.length );
@@ -143,7 +154,38 @@ public class FiltroActivity extends AppCompatActivity {
             //Recupera filtros
             recuperarFiltros();
 
+
+
         }
+
+        ConfiguracaoFirebase.getFirebase().child("alunos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                for (DataSnapshot alunoSnapshot: snapshot.getChildren()) {
+
+                    Aluno aluno = alunoSnapshot.getValue(Aluno.class);
+
+                    String areaName = alunoSnapshot.child("nome").getValue(String.class);
+
+                    //Log.i("teste", escola.getId());
+                    alunosOBJ.add(aluno);
+                    alunosString.add(areaName);
+
+                }
+
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(FiltroActivity.this, android.R.layout.simple_spinner_item, alunosString);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(areasAdapter);
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -170,6 +212,7 @@ public class FiltroActivity extends AppCompatActivity {
 
                         //Recupera dados de usuário logado
                         usuarioLogado = dataSnapshot.getValue( Usuario.class );
+
 
                         /*
                         * Recuperar seguidores */
@@ -238,6 +281,10 @@ public class FiltroActivity extends AppCompatActivity {
         postagem.setIdUsuario( idUsuarioLogado );
         postagem.setDescricao( textDescricaoFiltro.getText().toString() );
 
+        int posicao = spinner.getSelectedItemPosition();
+        postagem.setAluno(alunosOBJ.get(posicao));
+        postagem.setUsuario(usuarioLogado);
+
         //Recuperar dados da imagem para o firebase
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         imagemFiltro.compress(Bitmap.CompressFormat.JPEG, 70, baos);
@@ -276,7 +323,7 @@ public class FiltroActivity extends AppCompatActivity {
                         usuarioLogado.atualizarQtdPostagem();
 
                         //Salvar postagem
-                        if( postagem.salvar( seguidoresSnapshot ) ){
+                         if( postagem.salvar( seguidoresSnapshot ) ){
 
                             Toast.makeText(FiltroActivity.this,
                                     "Sucesso ao salvar postagem!",
@@ -284,6 +331,8 @@ public class FiltroActivity extends AppCompatActivity {
                             dialog.cancel();
                             finish();
                         }
+
+                        //postagem.salvarPostagem();
 
                     }
                 });
