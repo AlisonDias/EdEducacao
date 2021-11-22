@@ -43,6 +43,7 @@ public class AdapterAvaliacao extends RecyclerView.Adapter<AdapterAvaliacao.MyVi
 
         Avaliacao avaliacao2 = avaliacaoLista.get(position);
         holder.avaliacaoNome.setText(avaliacao2.getAluno().getNome());
+        holder.avaliacaoData.setText(avaliacao2.getData());
 
         Log.i("0000000000", avaliacao2.toString());
 
@@ -57,13 +58,14 @@ public class AdapterAvaliacao extends RecyclerView.Adapter<AdapterAvaliacao.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView avaliacaoNome;
+        TextView avaliacaoNome, avaliacaoData;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
 
             avaliacaoNome = itemView.findViewById(R.id.textViewAvaliacao);
+            avaliacaoData = itemView.findViewById(R.id.textViewDataAdapter);
 
 
         }

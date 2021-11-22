@@ -6,11 +6,20 @@
 
     <TextView
         android:id="@+id/textViewAvaliacao"
-        android:layout_width="match_parent"
+        android:layout_width="394dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
         android:text="Avaliacao"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewDataAdapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:text="Data"
         android:textSize="18sp" />
 
     <include
