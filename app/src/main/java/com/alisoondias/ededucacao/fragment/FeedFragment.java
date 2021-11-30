@@ -3,6 +3,7 @@ package com.alisoondias.ededucacao.fragment;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,18 +38,16 @@ public class FeedFragment extends Fragment {
     private ValueEventListener valueEventListenerFeed;
     private DatabaseReference feedRef;
     private String idUsuarioLogado;
-
-
-    public FeedFragment() {
-        // Required empty public constructor
-    }
+    private View view;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        view = inflater.inflate(R.layout.fragment_feed, container, false);
+
+        Log.d("teste", "teste00000000000000000000000000212121");
 
         //Configurações iniciais
         idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
@@ -65,16 +64,21 @@ public class FeedFragment extends Fragment {
         recyclerFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerFeed.setAdapter( adapterFeed );
 
+        Log.i("teste", "teste");
+
         return view;
     }
 
     private void listarFeed(){
+
 
         valueEventListenerFeed = feedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for ( DataSnapshot ds: dataSnapshot.getChildren() ){
                     listaFeed.add( ds.getValue(Postagem.class) );
+
+
                 }
                 Collections.reverse( listaFeed );
                 adapterFeed.notifyDataSetChanged();

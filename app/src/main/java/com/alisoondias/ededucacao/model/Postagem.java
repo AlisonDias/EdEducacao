@@ -35,7 +35,7 @@ public class Postagem implements Serializable {
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
 
         //Referência para postagem
-        String combinacaoId = "/" + getIdUsuario() + "/" + getId();
+        String combinacaoId = "/" + getId();
         objeto.put("/postagens" + combinacaoId, this );
 
         //Referência para postagem
@@ -54,7 +54,7 @@ public class Postagem implements Serializable {
             dadosSeguidor.put("fotoUsuario", usuarioLogado.getCaminhoFoto() );
 
 
-            String idsAtualizacao = "/" + idSeguidor + "/" + getId();
+            String idsAtualizacao = "/" + getId();
             objeto.put("/feed" + idsAtualizacao, dadosSeguidor );
 
         }

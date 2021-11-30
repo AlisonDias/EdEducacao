@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,7 +51,7 @@ public class FeedFragment extends Fragment {
         //Configurações iniciais
         idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         feedRef = ConfiguracaoFirebase.getFirebase()
-                .child("postagens").child(idUsuarioLogado);
+                .child("postagens");
 
         //Inicializar componentes
         recyclerFeed = view.findViewById(R.id.recyclerFeed);
@@ -68,13 +69,13 @@ public class FeedFragment extends Fragment {
 
         valueEventListenerFeed = feedRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for ( DataSnapshot ds: dataSnapshot.getChildren() ){
                     listaFeed.add( ds.getValue(Postagem.class) );
 
-                    //Log.i("urlFoto", listaFeed);
+                    Log.i("Dados Recuperados", ds.toString());
                 }
-                Collections.reverse( listaFeed );
+                //Collections.reverse( listaFeed );
                 adapterFeed.notifyDataSetChanged();
 
 
@@ -82,6 +83,8 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+                Log.i("erroAAA", databaseError.toString());
 
             }
         });

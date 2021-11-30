@@ -45,6 +45,8 @@ public class AlunoFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("teste", "teste00000000000000000000000000212121");
+
         view = inflater.inflate(R.layout.fragment_aluno, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewAlunos) ;
